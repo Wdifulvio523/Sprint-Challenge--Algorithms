@@ -5,7 +5,7 @@ a)  a = 0
     while (a < n * n * n):
       a = a + n * n
 ```
-Runtime: `O(n)` because as `n` increases, the amount of steps increases
+Runtime: `O(n)` linear because as `n` increases, the amount of steps for the loop increases 
 
 ```
 b)  sum = 0
@@ -20,7 +20,7 @@ b)  sum = 0
             l += 1
             sum += 1
 ```
-Runtime: `O(n^4)` because we at the first loop we're automatically at `O(n)` and we have 3 additional nested loops
+Runtime: `O(n^2)`  because we at the first loop we're automatically at `O(n)` and we have 3 additional nested loops
 
 ```
 c)  def bunnieEars(bunnies):
@@ -29,7 +29,7 @@ c)  def bunnieEars(bunnies):
 
       return 2 + bunnyEars(bunnies-1)
 ```
-Runtime: `O(n)` because as bunnies increases, more steps are added
+Runtime: `O(2^n)` because as bunnies increases, the function will need to call itself more times.
 
 ## Exercise II
 
@@ -38,3 +38,4 @@ Runtime: `O(n)` because as bunnies increases, more steps are added
 -- If egg breaks, middle floor is now top floor. If egg does not break, middle floor is now bottomr floor
 -- Find middle floor again, using the previous middle floor as top/bottom
 -- Keep doing this until I find `_f_`
+-- Using Binary search, I believe time complexity would be `O(log n)`.
