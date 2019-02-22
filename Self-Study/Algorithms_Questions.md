@@ -42,3 +42,11 @@ determine the value of _f_ such that the number of dropped eggs is minimized.
 
 Write out your proposed algorithm in plain English or pseudocode and give the
 runtime complexity of your solution.
+
+ANSWER: I would use a binary search here, as the floors are already sorted. I would find the middle floor, drop an egg. If breaks, I would find the middle floor again, this time using the floor I'm on (the previous middle floor) as the top floor. I would do this to I get to the correct floor. This minimizes the total number of dropped eggs.
+
+// Binary search, because floors are already "sorted"
+// Find middle floor between first flor and top floor, and dorp egg
+// If egg breaks, middle floor is now top floor. If egg does not break, middle floor is now bottomr floor
+// Find middle floor again, using the previous middle floor as top/bottom
+// Keep doing this until I find `_f_`
