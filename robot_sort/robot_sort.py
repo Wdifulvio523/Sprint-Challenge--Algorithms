@@ -99,46 +99,48 @@ class SortingRobot:
         return self._light == "ON"
 
     def sort(self):
-
-        #initialize our boolean to true (turn light on)
-        self.set_light_on()
+        #turn light on
+        self.set_light_on() 
         
-        #run loop while light is on  
-        while self._light == "ON":
+        # start a loop using light is on method. and the loop continues while the light is off.
+        while self.light_is_on(): 
             
-            #default it to off inside the loop so that the loop will be able to exit
-            self.set_light_off()
-            
-            #loop through a range from 0 up to the length of the list
-            for i in range(0, len(self._list)):
-                
-                # if i equals 0, set the position of robot to i and continue loop
-                if i == 0:
-                    self._position = i
-                    continue
-                # set the item equal to the item at _position in the _list     
-                self._item = self._list[self._position]
-                # Move robot right
-                self.move_right()
-                
-                # compare item in hand to item on floor
-                # if less than 0, do nothing because floor item is greater than held item, so do nothing
-                if self.compare_item() < 0:
-                    continue
-                # if more than 0, this means that the held item is greater than the floor item: 
-                elif self.compare_item() > 0:
-                    
-                    #swap the two items so now floor item is greater than held item
-                    self.swap_item()
-                    #move back left
-                    self.move_left()
-                    # Swap this floor item with held item
-                    self.swap_item()
-                    # move back right
-                    self.move_right()
-                    # turn light on to continue loop and comparisons
-                    self.set_light_on()
+            # turn light off at beginning of loop
+            self.set_light_off() 
 
+            # while the robot is able to move right:
+            while self.can_move_right(): 
+                #swap the held item with floor item, and move right
+                self.swap_item() 
+                self.move_right()  
+                # if held item is greater than floor item:
+                if self.compare_item() == 1:  
+                    # swap the two items
+                    self.swap_item()  
+                    # move left
+                    self.move_left()
+                    #swap these items
+                    self.swap_item()  
+                    # move back right 
+                    self.move_right()  
+                    #turn the light on
+                    self.set_light_on() 
+                # in any other case besides the held item being greater than the floor item:
+                else:  
+                    # move robot left
+                    self.move_left()  # move left
+                      # swap the two items
+                    self.swap_item()  
+                       # move robot right
+                    self.move_right()  
+             # while the light is off:
+            if self.light_is_on():
+                # while the robot it able to move left 
+                while self.can_move_left():
+                    #move left
+                    self.move_left()
+    
+   
 
 
 if __name__ == "__main__":
@@ -152,3 +154,43 @@ if __name__ == "__main__":
 
     robot.sort()
     print(robot._list)
+
+
+    #   # initialize our boolean to true (turn light on)
+    #     self.set_light_on()
+
+    #     #run loop while light is on
+    #     while self._light == "ON":
+
+    #         #default it to off inside the loop so that the loop will be able to exit
+    #         self.set_light_off()
+
+    #         #loop through a range from 0 up to the length of the list
+    #         for i in range(0, len(self._list)):
+
+    #             # if i equals 0, set the position of robot to i and continue loop
+    #             if i == 0:
+    #                 self._position = i
+    #                 continue
+    #             # set the item equal to the item at _position in the _list
+    #             self._item = self._list[self._position]
+    #             # Move robot right
+    #             self.move_right()
+
+    #             # compare item in hand to item on floor
+    #             # if less than 0, do nothing because floor item is greater than held item, so do nothing
+    #             if self.compare_item() < 0:
+    #                 continue
+    #             # if more than 0, this means that the held item is greater than the floor item:
+    #             elif self.compare_item() > 0:
+
+    #                 #swap the two items so now floor item is greater than held item
+    #                 self.swap_item()
+    #                 #move back left
+    #                 self.move_left()
+    #                 # Swap this floor item with held item
+    #                 self.swap_item()
+    #                 # move back right
+    #                 self.move_right()
+    #                 # turn light on to continue loop and comparisons
+    #                 self.set_light_on()
